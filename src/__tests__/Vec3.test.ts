@@ -15,6 +15,13 @@ describe('Test Vec3 class', () => {
 		expect(a.invert()).toEqual(expected);
 	});
 
+	test('scale correctly works', () => {
+		const a = new Vec3(1, 2, 3);
+		const expected = new Vec3(2, 4, 6);
+
+		expect(a.scale(2)).toEqual(expected);
+	});
+
 	test('addition correctly works', () => {
 		const a = new Vec3(1, 2, 3);
 		const b = new Vec3(1.1, 2.1, 3.1);

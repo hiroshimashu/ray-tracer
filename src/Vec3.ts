@@ -1,3 +1,5 @@
+import { number } from 'prop-types';
+
 export default class Vec3 {
 	x: number;
 	y: number;
@@ -15,6 +17,10 @@ export default class Vec3 {
 
 	public invert(): Vec3 {
 		return new Vec3(1 / this.x, 1 / this.y, 1 / this.z);
+	}
+
+	public scale(scale: number): Vec3 {
+		return new Vec3(this.x * scale, this.y * scale, this.z * scale);
 	}
 
 	public add(another: Vec3): Vec3 {

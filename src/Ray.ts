@@ -6,4 +6,8 @@ class Vec3 {
 		this.origin = origin;
 		this.direction = direction;
 	}
+
+	public pointAtParameter(t: number): Vec3 {
+		return new Vec3(this.origin);
+	}
 }
