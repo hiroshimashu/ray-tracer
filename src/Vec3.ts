@@ -48,4 +48,8 @@ export default class Vec3 {
 	public length(): number {
 		return Math.sqrt(this.x * this.x + this.y + this.y + this.z * this.z);
 	}
+
+	public squared_length(): number {
+		return this.x * this.x + this.y + this.y + this.z * this.z;
+	}
 }

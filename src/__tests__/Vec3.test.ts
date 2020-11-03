@@ -75,4 +75,11 @@ describe('Test Vec3 class', () => {
 
 		expect(a.length()).toBe(expected);
 	});
+
+	test('Squared length correctly works', () => {
+		const a = new Vec3(1, 2, 3);
+		const expected = 14;
+
+		expect(a.squared_length()).toBe(expected);
+	});
 });
