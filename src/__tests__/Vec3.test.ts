@@ -68,4 +68,11 @@ describe('Test Vec3 class', () => {
 
 		expect(a.crossProduct(b)).toEqual(expected);
 	});
+
+	test('length correctly works', () => {
+		const a = new Vec3(1, 2, 3);
+		const expected = Math.sqrt(14);
+
+		expect(a.length()).toBe(expected);
+	});
 });
