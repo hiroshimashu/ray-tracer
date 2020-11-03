@@ -1,6 +1,6 @@
 import Vec3 from './Vec3';
 
-class Ray {
+export default class Ray {
 	origin: Vec3;
 	direction: Vec3;
 
