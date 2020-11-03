@@ -31,4 +31,16 @@ export default class Vec3 {
 	public division(another: Vec3): Vec3 {
 		return new Vec3(this.x / another.x, this.y / another.y, this.z / another.z);
 	}
+
+	public dotProduct(another: Vec3): number {
+		return this.x * another.x + this.y * another.y + this.z * another.z;
+	}
+
+	public crossProduct(another: Vec3): Vec3 {
+		return new Vec3(
+			this.y * another.z - this.z * another.y,
+			this.z * another.x - this.x * another.z,
+			this.x * another.y - this.y * another.x
+		);
+	}
 }
