@@ -22,6 +22,13 @@ describe('Test Vec3 class', () => {
 		expect(a.scale(2)).toEqual(expected);
 	});
 
+	test('scale correctly works when scale is not integer', () => {
+		const a = new Vec3(1, 1, 1);
+		const expected = new Vec3(1 / Math.sqrt(3), 1 / Math.sqrt(3), 1 / Math.sqrt(3));
+
+		expect(a.scale(1 / Math.sqrt(3))).toEqual(expected);
+	});
+
 	test('addition correctly works', () => {
 		const a = new Vec3(1, 2, 3);
 		const b = new Vec3(1.1, 2.1, 3.1);
@@ -74,6 +81,13 @@ describe('Test Vec3 class', () => {
 		const expected = new Vec3(-3, 6, -3);
 
 		expect(a.crossProduct(b)).toEqual(expected);
+	});
+
+	test('normalize correctly works', () => {
+		const a = new Vec3(1, 1, 1);
+		const expected = new Vec3(1 / Math.sqrt(3), 1 / Math.sqrt(3), 1 / Math.sqrt(3));
+
+		expect(a.normalize()).toEqual(expected);
 	});
 
 	test('length correctly works', () => {
