@@ -19,4 +19,16 @@ export default class Vec3 {
 	public add(another: Vec3): Vec3 {
 		return new Vec3(this.x + another.x, this.y + another.y, this.z + another.z);
 	}
+
+	public subtract(another: Vec3): Vec3 {
+		return new Vec3(this.x - another.x, this.y - another.y, this.z - another.z);
+	}
+
+	public mutiply(another: Vec3): Vec3 {
+		return new Vec3(this.x * another.x, this.y * another.y, this.z * another.z);
+	}
+
+	public division(another: Vec3): Vec3 {
+		return new Vec3(this.x / another.x, this.y / another.y, this.z / another.z);
+	}
 }

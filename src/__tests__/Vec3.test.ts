@@ -23,4 +23,31 @@ describe('Test Vec3 class', () => {
 
 		expect(a.add(b)).toEqual(expected);
 	});
+
+	test('multiply correctly works', () => {
+		const a = new Vec3(1, 2, 3);
+		const b = new Vec3(4, 5, 6);
+
+		const expected = new Vec3(4, 10, 18);
+
+		expect(a.mutiply(b)).toEqual(expected);
+	});
+
+	test('subtract correctly works', () => {
+		const a = new Vec3(1, 2, 3);
+		const b = new Vec3(4, 5, 6);
+
+		const expected = new Vec3(-3, -3, -3);
+
+		expect(a.subtract(b)).toEqual(expected);
+	});
+
+	test('division correctly works', () => {
+		const a = new Vec3(1, 2, 3);
+		const b = new Vec3(4, 5, 6);
+
+		const expected = new Vec3(1 / 4, 2 / 5, 3 / 6);
+
+		expect(a.division(b)).toEqual(expected);
+	});
 });
