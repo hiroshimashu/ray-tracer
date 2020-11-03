@@ -52,8 +52,7 @@ export default class Vec3 {
 	}
 
 	public normalize(): Vec3 {
-		const length = this.length();
-		return this.scale(1 / length);
+		return this.scale(1 / this.length());
 	}
 
 	public length(): number {

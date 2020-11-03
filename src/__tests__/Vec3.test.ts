@@ -85,7 +85,8 @@ describe('Test Vec3 class', () => {
 
 	test('normalize correctly works', () => {
 		const a = new Vec3(1, 1, 1);
-		const expected = new Vec3(1 / Math.sqrt(3), 1 / Math.sqrt(3), 1 / Math.sqrt(3));
+		const length = a.length();
+		const expected = new Vec3(1 / length, 1 / length, 1 / length);
 
 		expect(a.normalize()).toEqual(expected);
 	});
