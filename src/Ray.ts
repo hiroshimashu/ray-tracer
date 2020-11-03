@@ -1,4 +1,6 @@
-class Vec3 {
+import Vec3 from './Vec3';
+
+class Ray {
 	origin: Vec3;
 	direction: Vec3;
 
@@ -8,6 +10,6 @@ class Vec3 {
 	}
 
 	public pointAtParameter(t: number): Vec3 {
-		return new Vec3(this.origin);
+		return this.origin.add(this.direction.scale(t));
 	}
 }
