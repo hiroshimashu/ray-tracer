@@ -50,4 +50,22 @@ describe('Test Vec3 class', () => {
 
 		expect(a.division(b)).toEqual(expected);
 	});
+
+	test('dot product correctly works', () => {
+		const a = new Vec3(1, 2, 3);
+		const b = new Vec3(4, 5, 6);
+
+		const expected = 32;
+
+		expect(a.dotProduct(b)).toBe(expected);
+	});
+
+	test('cross product correctly works', () => {
+		const a = new Vec3(1, 2, 3);
+		const b = new Vec3(4, 5, 6);
+
+		const expected = new Vec3(-3, 6, -3);
+
+		expect(a.crossProduct(b)).toEqual(expected);
+	});
 });
