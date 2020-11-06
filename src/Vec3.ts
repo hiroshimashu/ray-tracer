@@ -1,5 +1,3 @@
-import { number } from 'prop-types';
-
 export default class Vec3 {
 	x: number;
 	y: number;
