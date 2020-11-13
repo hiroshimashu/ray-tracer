@@ -21,7 +21,7 @@ export default class Color extends Vec3 {
 		return new Color(vec3.x, vec3.y, vec3.z);
 	}
 
-	toString(): string {
+	toRGBArray(): [number, number, number] {
 		const correctedR = Math.sqrt(this.r);
 		const correctedG = Math.sqrt(this.g);
 		const correctedB = Math.sqrt(this.b);
@@ -34,7 +34,7 @@ export default class Color extends Vec3 {
 		const ig = Math.floor(256 * clampedG);
 		const ib = Math.floor(256 * clampedB);
 
-		return `${ir} ${ig} ${ib}`;
+		return [ir, ig, ib];
 	}
 }
 

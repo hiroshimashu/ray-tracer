@@ -11,5 +11,5 @@ test('Intialize color', () => {
 test('Convert color to rgb string', () => {
 	const color = new Color(0.2, 0.8, 0.6);
 
-	expect(color.toString()).toBe(`${114} ${228} ${198}`);
+	expect(color.toRGBArray()).toEqual([114, 228, 198]);
 });

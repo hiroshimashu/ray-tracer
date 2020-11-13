@@ -10,8 +10,17 @@
 
 <body>
   <div class="main-wrapper">
+    <div>Ray Tracer</div>
     <canvas id="canvas"></canvas>
   </div>
 </body>
+<script>
+  const canvas = document.getElementById('canvas');
+  canvas.width = 300;
+  canvas.height = 200;
+  const ctx = canvas.getContext('2d');
+  const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+</script>
 
 </html>
