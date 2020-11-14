@@ -1,6 +1,5 @@
-"use strict";
-function hello(name) {
-    return `Hello, ${name}!`;
+'use strict';
+function main() {
+	console.log('Hello, world!');
 }
-console.log(hello("World"));
 //# sourceMappingURL=index.js.map

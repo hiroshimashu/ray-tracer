@@ -11,15 +11,32 @@
 <body>
   <div class="main-wrapper">
     <div>Ray Tracer</div>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" width="300" height="200"></canvas>
   </div>
 </body>
+<script src="./dist/index.js"></script>
 <script>
   const canvas = document.getElementById('canvas');
-  canvas.width = 300;
-  canvas.height = 200;
   const ctx = canvas.getContext('2d');
-  const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  const width = 300;
+  const height = 200;
+
+  let ImageData = ctx.getImageData(0, 0, width, height);
+  let data = ImageData.data
+  for (var x = 0; x < width; ++x) {
+    for (var y = 0; y < height; ++y) {
+      var index = (x + y * width) * 4;
+      data[index + 0] = x;
+      data[index + 1] = y;
+      data[index + 2] = Math.floor((x + y) / 255);
+      data[index + 3] = 255;
+    };
+  };
+  ImageData.data = data;
+  console.log(ImageData.data);
+  ctx.putImageData(ImageData, 0, 0);
+  main();
 
 </script>
 
