@@ -1,16 +1,14 @@
 import Color from './Color';
 
-function Render(ctxWidth: number, ctxHeight: number): number[][] {
-	const colorPixelArray = [];
-	for (let i = 0; i < ctxWidth - 1; i++) {
-		for (let j = 0; j < ctxHeight - 1; j++) {
-			const r = Math.random();
-			const g = Math.random();
-			const b = Math.random();
-			const color = new Color(r, g, b);
-
-			colorPixelArray.push([...color.toRGBArray(), 1]);
+function Render(ctxWidth: number, ctxHeight: number, data: Uint8ClampedArray): Uint8ClampedArray {
+	for (let x = 0; x < ctxWidth; x++) {
+		for (let y = 0; y < ctxHeight; y++) {
+			const index = (x + y * ctxWidth) * 4;
+			data[index + 0] = x;
+			data[index + 1] = y;
+			data[index + 2] = Math.floor((x + y) / 255);
+			data[index + 3] = 255;
 		}
 	}
-	return colorPixelArray;
+	return data;
 }

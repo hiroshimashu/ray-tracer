@@ -24,20 +24,10 @@
 
   let ImageData = ctx.getImageData(0, 0, width, height);
   let data = ImageData.data
-  for (var x = 0; x < width; ++x) {
-    for (var y = 0; y < height; ++y) {
-      var index = (x + y * width) * 4;
-      data[index + 0] = x;
-      data[index + 1] = y;
-      data[index + 2] = Math.floor((x + y) / 255);
-      data[index + 3] = 255;
-    };
-  };
-  ImageData.data = data;
-  console.log(ImageData.data);
-  ctx.putImageData(ImageData, 0, 0);
-  main();
+  data = Render(width, height, data);
 
+  ImageData.data = data;
+  ctx.putImageData(ImageData, 0, 0);
 </script>
 
 </html>
