@@ -1,6 +1,6 @@
 import Vec3 from './Vec3';
 
-export default class Color extends Vec3 {
+class Color extends Vec3 {
 	constructor(r: number, g: number, b: number) {
 		super(r, g, b);
 	}
@@ -48,3 +48,5 @@ function clamp(num: number, min: number, max: number): number {
 
 	return num;
 }
+
+export { Color };

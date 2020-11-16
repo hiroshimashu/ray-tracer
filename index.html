@@ -14,8 +14,8 @@
     <canvas id="canvas" width="300" height="200"></canvas>
   </div>
 </body>
-<script src="./dist/index.js"></script>
-<script>
+<script type="module">
+  import { Render } from "./dist/index.js";
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
 
@@ -23,7 +23,7 @@
   const height = 200;
 
   let ImageData = ctx.getImageData(0, 0, width, height);
-  let data = ImageData.data
+  let data = ImageData;
   data = Render(width, height, data);
 
   ImageData.data = data;

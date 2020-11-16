@@ -1,4 +1,4 @@
-import Color from '../Color';
+import { Color } from '../Color';
 
 test('Intialize color', () => {
 	const color = new Color(0.2, 0.8, 0.6);

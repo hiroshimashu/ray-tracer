@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Vec3 {
+export default class Vec3 {
     constructor(x, y, z) {
         this.x = x;
         this.y = y;
@@ -43,5 +41,4 @@ class Vec3 {
         return this.x * this.x + this.y + this.y + this.z * this.z;
     }
 }
-exports.default = Vec3;
 //# sourceMappingURL=Vec3.js.map

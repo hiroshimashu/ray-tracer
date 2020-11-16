@@ -1,12 +1,17 @@
-import Color from './Color';
+import { Color } from './Color';
 
-function Render(ctxWidth: number, ctxHeight: number, data: Uint8ClampedArray): Uint8ClampedArray {
+export function Render(ctxWidth: number, ctxHeight: number, data: Uint8ClampedArray): Uint8ClampedArray {
 	for (let x = 0; x < ctxWidth; x++) {
 		for (let y = 0; y < ctxHeight; y++) {
+			const r = x / ctxWidth;
+			const g = y / ctxHeight;
+			const b = 0.2;
+			const color = new Color(r, g, b);
+			const colorArray = color.toRGBArray();
 			const index = (x + y * ctxWidth) * 4;
-			data[index + 0] = x;
-			data[index + 1] = y;
-			data[index + 2] = Math.floor((x + y) / 255);
+			data[index + 0] = colorArray[0];
+			data[index + 1] = colorArray[1];
+			data[index + 2] = colorArray[2];
 			data[index + 3] = 255;
 		}
 	}

@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Ray {
+export default class Ray {
     constructor(origin, direction) {
         this.origin = origin;
         this.direction = direction;
@@ -9,5 +7,4 @@ class Ray {
         return this.origin.add(this.direction.scale(t));
     }
 }
-exports.default = Ray;
 //# sourceMappingURL=Ray.js.map
