@@ -11,23 +11,10 @@
 <body>
   <div class="main-wrapper">
     <div>Ray Tracer</div>
-    <canvas id="canvas" width="300" height="200"></canvas>
+    <canvas id = "canvas"></canvas>
   </div>
 </body>
-<script type="module">
-  import { Render } from "./dist/index.js";
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-
-  const width = 300;
-  const height = 200;
-
-  let ImageData = ctx.getImageData(0, 0, width, height);
-  let data = ImageData;
-  data = Render(width, height, data);
-
-  ImageData.data = data;
-  ctx.putImageData(ImageData, 0, 0);
-</script>
+<script> var exports = {}; </script>
+<script type="module" src = "./dist/index.js"></script>
 
 </html>

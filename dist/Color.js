@@ -1,5 +1,11 @@
-import Vec3 from './Vec3';
-class Color extends Vec3 {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Color = void 0;
+const Vec3_1 = __importDefault(require("./Vec3"));
+class Color extends Vec3_1.default {
     constructor(r, g, b) {
         super(r, g, b);
     }
@@ -28,6 +34,7 @@ class Color extends Vec3 {
         return [ir, ig, ib];
     }
 }
+exports.Color = Color;
 function clamp(num, min, max) {
     if (num < min) {
         return min;
@@ -37,5 +44,4 @@ function clamp(num, min, max) {
     }
     return num;
 }
-export { Color };
 //# sourceMappingURL=Color.js.map

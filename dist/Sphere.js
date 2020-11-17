@@ -1,6 +1,11 @@
-import Hittable from './Hittable';
-import HitRecord from './HitRecord';
-export default class Sphere extends Hittable {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const Hittable_1 = __importDefault(require("./Hittable"));
+const HitRecord_1 = __importDefault(require("./HitRecord"));
+class Sphere extends Hittable_1.default {
     constructor(center, r) {
         super();
         this.center = center;
@@ -17,15 +22,16 @@ export default class Sphere extends Hittable {
             let temp = (-b - root) / a;
             if (temp < tmax && temp > tmin) {
                 const point = ray.pointAtParameter(temp);
-                return new HitRecord(temp, point, point.subtract(this.center).scale(1 / this.radius));
+                return new HitRecord_1.default(temp, point, point.subtract(this.center).scale(1 / this.radius));
             }
             temp = (-b + root) / a;
             if (temp < tmax && temp > tmin) {
                 const point = ray.pointAtParameter(temp);
-                return new HitRecord(temp, point, point.subtract(this.center).scale(1 / this.radius));
+                return new HitRecord_1.default(temp, point, point.subtract(this.center).scale(1 / this.radius));
             }
         }
         return null;
     }
 }
+exports.default = Sphere;
 //# sourceMappingURL=Sphere.js.map

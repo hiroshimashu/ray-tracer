@@ -1,6 +1,14 @@
 import { Color } from './Color';
 
-export function Render(ctxWidth: number, ctxHeight: number, data: Uint8ClampedArray): Uint8ClampedArray {
+export function Render() {
+	let canvas: any = document.getElementById('canvas');
+	const ctx = canvas.getContext('2d');
+	const ctxWidth = 300;
+	const ctxHeight = 200;
+
+	let ImageData = ctx.getImageData(0, 0, ctxWidth, ctxHeight);
+	let data = ImageData;
+
 	for (let x = 0; x < ctxWidth; x++) {
 		for (let y = 0; y < ctxHeight; y++) {
 			const r = x / ctxWidth;
@@ -15,5 +23,6 @@ export function Render(ctxWidth: number, ctxHeight: number, data: Uint8ClampedAr
 			data[index + 3] = 255;
 		}
 	}
-	return data;
+	ImageData.data = data;
+	ctx.putImageData(ImageData, 0, 0);
 }
