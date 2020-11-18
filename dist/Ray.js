@@ -1,13 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Ray {
-    constructor(origin, direction) {
+var Ray = /** @class */ (function () {
+    function Ray(origin, direction) {
         this.origin = origin;
         this.direction = direction;
     }
-    pointAtParameter(t) {
+    Ray.prototype.pointAtParameter = function (t) {
         return this.origin.add(this.direction.scale(t));
-    }
-}
-exports.default = Ray;
+    };
+    return Ray;
+}());
+export default Ray;
 //# sourceMappingURL=Ray.js.map

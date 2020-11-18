@@ -1,37 +1,48 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const Hittable_1 = __importDefault(require("./Hittable"));
-const HitRecord_1 = __importDefault(require("./HitRecord"));
-class Sphere extends Hittable_1.default {
-    constructor(center, r) {
-        super();
-        this.center = center;
-        this.radius = r;
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+import Hittable from './Hittable';
+import HitRecord from './HitRecord';
+var Sphere = /** @class */ (function (_super) {
+    __extends(Sphere, _super);
+    function Sphere(center, r) {
+        var _this = _super.call(this) || this;
+        _this.center = center;
+        _this.radius = r;
+        return _this;
     }
-    hit(ray, tmin, tmax) {
-        const fromRayToCenter = ray.origin.subtract(this.center);
-        const a = ray.direction.squared_length();
-        const b = fromRayToCenter.dotProduct(ray.direction);
-        const c = fromRayToCenter.squared_length() - this.radius * this.radius;
-        const discriminant = b * b - a * c;
+    Sphere.prototype.hit = function (ray, tmin, tmax) {
+        var fromRayToCenter = ray.origin.subtract(this.center);
+        var a = ray.direction.squared_length();
+        var b = fromRayToCenter.dotProduct(ray.direction);
+        var c = fromRayToCenter.squared_length() - this.radius * this.radius;
+        var discriminant = b * b - a * c;
         if (discriminant > 0) {
-            const root = Math.sqrt(discriminant);
-            let temp = (-b - root) / a;
+            var root = Math.sqrt(discriminant);
+            var temp = (-b - root) / a;
             if (temp < tmax && temp > tmin) {
-                const point = ray.pointAtParameter(temp);
-                return new HitRecord_1.default(temp, point, point.subtract(this.center).scale(1 / this.radius));
+                var point = ray.pointAtParameter(temp);
+                return new HitRecord(temp, point, point.subtract(this.center).scale(1 / this.radius));
             }
             temp = (-b + root) / a;
             if (temp < tmax && temp > tmin) {
-                const point = ray.pointAtParameter(temp);
-                return new HitRecord_1.default(temp, point, point.subtract(this.center).scale(1 / this.radius));
+                var point = ray.pointAtParameter(temp);
+                return new HitRecord(temp, point, point.subtract(this.center).scale(1 / this.radius));
             }
         }
         return null;
-    }
-}
-exports.default = Sphere;
+    };
+    return Sphere;
+}(Hittable));
+export default Sphere;
 //# sourceMappingURL=Sphere.js.map
