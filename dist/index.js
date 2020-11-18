@@ -5,7 +5,6 @@ export function Render() {
 	var ctxWidth = 300;
 	var ctxHeight = 200;
 	var ImageData = ctx.getImageData(0, 0, ctxWidth, ctxHeight);
-	var data = ImageData;
 	for (var x = 0; x < ctxWidth; x++) {
 		for (var y = 0; y < ctxHeight; y++) {
 			var r = x / ctxWidth;
@@ -14,14 +13,12 @@ export function Render() {
 			var color = new Color(r, g, b);
 			var colorArray = color.toRGBArray();
 			var index = (x + y * ctxWidth) * 4;
-			data[index + 0] = colorArray[0];
-			data[index + 1] = colorArray[1];
-			data[index + 2] = colorArray[2];
-			data[index + 3] = 255;
+			ImageData.data[index + 0] = colorArray[0];
+			ImageData.data[index + 1] = colorArray[1];
+			ImageData.data[index + 2] = colorArray[2];
+			ImageData.data[index + 3] = 255;
 		}
 	}
-	console.log(data);
-	ImageData.data = data;
 	ctx.putImageData(ImageData, 0, 0);
 }
 //# sourceMappingURL=index.js.map
