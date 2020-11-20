@@ -1,7 +1,7 @@
 import Hittable from './Hittable';
 import HitRecord from './HitRecord';
-import Ray from './Ray';
-import Vec3 from './Vec3';
+import { Ray } from './Ray';
+import { Vec3 } from './Vec3';
 
 export default class Sphere extends Hittable {
 	public center: Vec3;

@@ -1,4 +1,4 @@
-import Vec3 from '../Vec3';
+import { Vec3 } from '../Vec3';
 describe('Test Vec3 class', function () {
     test('negation correctly works', function () {
         var a = new Vec3(1, 2, 3);

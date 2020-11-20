@@ -1,6 +1,3 @@
-import { Ray } from '../Ray';
-import { Vec3 } from '../Vec3';
-
 describe('Ray class', () => {
 	test('pointAtParameter correctly works', () => {
 		const o = new Vec3(1, 2, 3);

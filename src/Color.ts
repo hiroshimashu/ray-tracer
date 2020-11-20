@@ -1,4 +1,4 @@
-import Vec3 from './Vec3';
+import { Vec3 } from './Vec3';
 
 export class Color extends Vec3 {
 	constructor(r: number, g: number, b: number) {
@@ -21,7 +21,7 @@ export class Color extends Vec3 {
 		return new Color(vec3.x, vec3.y, vec3.z);
 	}
 
-	toRGBArray(): [number, number, number] {
+	public toRGBArray(): [number, number, number] {
 		const correctedR = Math.sqrt(this.r);
 		const correctedG = Math.sqrt(this.g);
 		const correctedB = Math.sqrt(this.b);

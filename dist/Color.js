@@ -21,7 +21,7 @@ var __extends =
 			d.prototype = b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
 		};
 	})();
-import Vec3 from './Vec3.js';
+import { Vec3 } from './Vec3.js';
 var Color = /** @class */ (function(_super) {
 	__extends(Color, _super);
 	function Color(r, g, b) {

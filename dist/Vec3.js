@@ -42,5 +42,5 @@ var Vec3 = /** @class */ (function () {
     };
     return Vec3;
 }());
-export default Vec3;
+export { Vec3 };
 //# sourceMappingURL=Vec3.js.map

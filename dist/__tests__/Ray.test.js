@@ -1,5 +1,5 @@
-import Ray from '../Ray';
-import Vec3 from '../Vec3';
+import { Ray } from '../Ray';
+import { Vec3 } from '../Vec3';
 describe('Ray class', function () {
     test('pointAtParameter correctly works', function () {
         var o = new Vec3(1, 2, 3);

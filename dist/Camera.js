@@ -1,4 +1,4 @@
-import Ray from './Ray';
+import { Ray } from './Ray';
 var Camera = /** @class */ (function () {
     function Camera(origin, lowerLeftCorner, horizontal, vertical) {
         this.origin = origin;

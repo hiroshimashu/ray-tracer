@@ -1,4 +1,4 @@
-import Ray from './Ray';
+import { Ray } from './Ray';
 import HitRecord from './HitRecord';
 
 export default abstract class Hittable {

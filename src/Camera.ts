@@ -1,5 +1,5 @@
-import Vec3 from './Vec3';
-import Ray from './Ray';
+import { Vec3 } from './Vec3';
+import { Ray } from './Ray';
 
 export default class Camera {
 	origin: Vec3;

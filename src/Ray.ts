@@ -1,6 +1,7 @@
-import Vec3 from './Vec3';
+import { Vec3 } from './Vec3';
+import { Color } from "./Color";
 
-export default class Ray {
+export class Ray {
 	origin: Vec3;
 	direction: Vec3;
 

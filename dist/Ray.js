@@ -8,5 +8,5 @@ var Ray = /** @class */ (function () {
     };
     return Ray;
 }());
-export default Ray;
+export { Ray };
 //# sourceMappingURL=Ray.js.map
