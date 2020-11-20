@@ -43,5 +43,5 @@ export function transformRayToColor(ray: Ray): [number, number, number] {
 	const t = unit_direction.y * 0.5 + 0.5;
 	const startColor = Color.fromVec3(new Vec3(1.0, 1.0, 1.0));
 	const endColor = Color.fromVec3(new Vec3(0.5, 0.7, 1.0));
-	return (startColor.scale(1 - t).add(endColor.scale(t)) as Color).toRGBArray();
+	return Color.fromVec3(startColor.scale((1 - t)).add(endColor.scale(t))).toRGBArray();
 }
