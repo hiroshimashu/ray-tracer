@@ -45,11 +45,17 @@ export function Render() {
 }
 export function transformRayToColor(ray) {
 	var unit_direction = ray.direction.normalize();
-	var t = unit_direction.y * 0.5 + 0.5;
 	var center = new Vec3(0, 0, -1);
-	if (hitSphere(center, 0.5, ray)) {
-		return Color.fromVec3(new Vec3(1, 0, 0)).toRGBArray();
+	var t = hitSphere(center, 0.5, ray);
+	if (t > 0) {
+		var N = ray
+			.pointAtParameter(t)
+			.subtract(center)
+			.normalize();
+		console.log('normal vector is ', N);
+		return Color.fromVec3(new Vec3(N.x + 1, N.y + 1, N.z + 1).scale(0.5)).toRGBArray();
 	}
+	t = unit_direction.y * 0.5 + 0.5;
 	var startColor = Color.fromVec3(new Vec3(1.0, 1.0, 1.0));
 	var endColor = Color.fromVec3(new Vec3(0.5, 0.7, 1.0));
 	return Color.fromVec3(startColor.scale(1 - t).add(endColor.scale(t))).toRGBArray();
@@ -60,6 +66,10 @@ function hitSphere(center, radius, ray) {
 	var b = 2.0 * p.dotProduct(ray.direction);
 	var c = p.dotProduct(p) - radius * radius;
 	var discriminant = b * b - 4 * a * c;
-	return discriminant > 0;
+	if (discriminant < 0) {
+		return -1;
+	} else {
+		return (-b - Math.sqrt(discriminant)) / 2 * a;
+	}
 }
 //# sourceMappingURL=index.js.map

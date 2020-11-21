@@ -42,21 +42,27 @@ export function Render() {
 
 export function transformRayToColor(ray: Ray): [number, number, number] {
 	const unit_direction = ray.direction.normalize();
-	const t = unit_direction.y * 0.5 + 0.5;
 	const center = new Vec3(0, 0, -1);
-	if (hitSphere(center, 0.5, ray)) {
-		return Color.fromVec3(new Vec3(1, 0, 0)).toRGBArray();
+	let t = hitSphere(center, 0.5, ray);
+	if (t > 0) {
+		const N = ray.pointAtParameter(t).subtract(center).normalize();
+		return Color.fromVec3((new Vec3(N.x + 1, N.y + 1, N.z + 1)).scale(0.5)).toRGBArray();
 	}
+	t = unit_direction.y * 0.5 + 0.5;
 	const startColor = Color.fromVec3(new Vec3(1.0, 1.0, 1.0));
 	const endColor = Color.fromVec3(new Vec3(0.5, 0.7, 1.0));
 	return Color.fromVec3(startColor.scale((1 - t)).add(endColor.scale(t))).toRGBArray();
 }
 
-function hitSphere(center: Vec3, radius: number, ray: Ray): boolean {
+function hitSphere(center: Vec3, radius: number, ray: Ray): number {
 	const p = ray.origin.subtract(center);
 	const a = ray.direction.dotProduct(ray.direction);
 	const b = 2.0 * p.dotProduct(ray.direction);
 	const c = p.dotProduct(p) - radius * radius;
 	const discriminant = b * b - 4 * a * c;
-	return discriminant > 0;
+	if (discriminant < 0) {
+		return -1;
+	} else {
+		return (-b - Math.sqrt(discriminant)) / 2 * a;
+	}
 }
