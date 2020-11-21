@@ -1,3 +1,4 @@
+import { Verify } from 'crypto';
 import { Color } from './Color';
 import { Ray } from './Ray';
 import { Vec3 } from "./Vec3";
@@ -35,13 +36,27 @@ export function Render() {
 			ImageData.data[index + 3] = 255;
 		}
 	}
+	console.log(ImageData.data);
 	ctx.putImageData(ImageData, 0, 0);
 }
 
 export function transformRayToColor(ray: Ray): [number, number, number] {
 	const unit_direction = ray.direction.normalize();
 	const t = unit_direction.y * 0.5 + 0.5;
+	const center = new Vec3(0, 0, -1);
+	if (hitSphere(center, 0.5, ray)) {
+		return Color.fromVec3(new Vec3(1, 0, 0)).toRGBArray();
+	}
 	const startColor = Color.fromVec3(new Vec3(1.0, 1.0, 1.0));
 	const endColor = Color.fromVec3(new Vec3(0.5, 0.7, 1.0));
 	return Color.fromVec3(startColor.scale((1 - t)).add(endColor.scale(t))).toRGBArray();
+}
+
+function hitSphere(center: Vec3, radius: number, ray: Ray): boolean {
+	const p = ray.origin.subtract(center);
+	const a = ray.direction.dotProduct(ray.direction);
+	const b = 2.0 * p.dotProduct(ray.direction);
+	const c = p.dotProduct(p) - radius * radius;
+	const discriminant = b * b - 4 * a * c;
+	return discriminant > 0;
 }

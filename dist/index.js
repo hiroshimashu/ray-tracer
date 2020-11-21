@@ -40,16 +40,26 @@ export function Render() {
 			ImageData.data[index + 3] = 255;
 		}
 	}
+	console.log(ImageData.data);
 	ctx.putImageData(ImageData, 0, 0);
 }
-function transformRayToColor(ray) {
+export function transformRayToColor(ray) {
 	var unit_direction = ray.direction.normalize();
 	var t = unit_direction.y * 0.5 + 0.5;
+	var center = new Vec3(0, 0, -1);
+	if (hitSphere(center, 0.5, ray)) {
+		return Color.fromVec3(new Vec3(1, 0, 0)).toRGBArray();
+	}
 	var startColor = Color.fromVec3(new Vec3(1.0, 1.0, 1.0));
 	var endColor = Color.fromVec3(new Vec3(0.5, 0.7, 1.0));
-	return startColor
-		.scale(1 - t)
-		.add(endColor.scale(t))
-		.toRGBArray();
+	return Color.fromVec3(startColor.scale(1 - t).add(endColor.scale(t))).toRGBArray();
+}
+function hitSphere(center, radius, ray) {
+	var p = ray.origin.subtract(center);
+	var a = ray.direction.dotProduct(ray.direction);
+	var b = 2.0 * p.dotProduct(ray.direction);
+	var c = p.dotProduct(p) - radius * radius;
+	var discriminant = b * b - 4 * a * c;
+	return discriminant > 0;
 }
 //# sourceMappingURL=index.js.map
