@@ -1,6 +1,6 @@
 import { Vec3 } from './Vec3';
 
-export default class HitRecord {
+export class HitRecord {
 	t: number;
 	p: Vec3;
 	normal: Vec3;
