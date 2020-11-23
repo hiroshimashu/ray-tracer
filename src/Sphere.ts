@@ -33,7 +33,8 @@ export default class Sphere extends Hittable {
 		}
 		rec.t = root;
 		rec.p = ray.pointAtParameter(temp);
-		rec.normal = rec.p.subtract(this.center).scale(1 / this.radius);
+		const outwarodNormal = rec.p.subtract(this.center).scale(1 / this.radius);
+		rec.setFaceNormal(ray, outwarodNormal);
 	
 		return true;
 	}
