@@ -57,12 +57,12 @@ export function transformRayToColor(ray: Ray): [number, number, number] {
 function hitSphere(center: Vec3, radius: number, ray: Ray): number {
 	const p = ray.origin.subtract(center);
 	const a = ray.direction.dotProduct(ray.direction);
-	const b = 2.0 * p.dotProduct(ray.direction);
+	const half_b = p.dotProduct(ray.direction);
 	const c = p.dotProduct(p) - radius * radius;
-	const discriminant = b * b - 4 * a * c;
+	const discriminant = half_b * half_b - a * c;
 	if (discriminant < 0) {
 		return -1;
 	} else {
-		return (-b - Math.sqrt(discriminant)) / 2 * a;
+		return (-half_b - Math.sqrt(discriminant)) / a;
 	}
 }

@@ -52,7 +52,6 @@ export function transformRayToColor(ray) {
 			.pointAtParameter(t)
 			.subtract(center)
 			.normalize();
-		console.log('normal vector is ', N);
 		return Color.fromVec3(new Vec3(N.x + 1, N.y + 1, N.z + 1).scale(0.5)).toRGBArray();
 	}
 	t = unit_direction.y * 0.5 + 0.5;
@@ -63,9 +62,9 @@ export function transformRayToColor(ray) {
 function hitSphere(center, radius, ray) {
 	var p = ray.origin.subtract(center);
 	var a = ray.direction.dotProduct(ray.direction);
-	var b = 2.0 * p.dotProduct(ray.direction);
+	var half_b = p.dotProduct(ray.direction);
 	var c = p.dotProduct(p) - radius * radius;
-	var discriminant = b * b - 4 * a * c;
+	var discriminant = half_b * half_b - a * c;
 	if (discriminant < 0) {
 		return -1;
 	} else {
