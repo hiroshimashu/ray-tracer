@@ -3,5 +3,5 @@ var Hittable = /** @class */ (function () {
     }
     return Hittable;
 }());
-export default Hittable;
+export { Hittable };
 //# sourceMappingURL=Hittable.js.map

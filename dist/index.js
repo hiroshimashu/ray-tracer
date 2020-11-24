@@ -1,6 +1,9 @@
 import { Color } from './Color.js';
 import { Ray } from './Ray.js';
 import { Vec3 } from './Vec3.js';
+import { Hittables } from './Hittables.js';
+import { Sphere } from './Sphere.js';
+import { INFINITY } from './utils.js';
 export function Render() {
 	// Setting related to Image.
 	var canvas = document.getElementById('canvas');
@@ -9,6 +12,14 @@ export function Render() {
 	var ctxHeight = 400;
 	var aspectRatio = 1.5;
 	var ImageData = ctx.getImageData(0, 0, ctxWidth, ctxHeight);
+	// Setting world
+	var world = new Hittables();
+	var Sphere1Center = new Vec3(0, 0, -1);
+	var Sphere1Radius = 0.5;
+	var Sphere2Center = new Vec3(0, -100.5, -1);
+	var Sphere2Radius = 100;
+	world.add(new Sphere(Sphere1Center, Sphere1Radius));
+	world.add(new Sphere(Sphere2Center, Sphere2Radius));
 	// Setting related to Camera
 	var viewPortHeight = 2.0;
 	var viewPortWidth = viewPortHeight * aspectRatio;
@@ -32,7 +43,7 @@ export function Render() {
 					.add(vertical.scale(v))
 					.subtract(origin)
 			);
-			var colorArray = transformRayToColor(ray);
+			var colorArray = transformRayToColor(ray, world);
 			var index = (x + y * ctxWidth) * 4;
 			ImageData.data[index + 0] = colorArray[0];
 			ImageData.data[index + 1] = colorArray[1];
@@ -43,21 +54,14 @@ export function Render() {
 	console.log(ImageData.data);
 	ctx.putImageData(ImageData, 0, 0);
 }
-export function transformRayToColor(ray) {
-	var unit_direction = ray.direction.normalize();
-	var center = new Vec3(0, 0, -1);
-	var t = hitSphere(center, 0.5, ray);
-	if (t > 0) {
-		var N = ray
-			.pointAtParameter(t)
-			.subtract(center)
-			.normalize();
-		return Color.fromVec3(new Vec3(N.x + 1, N.y + 1, N.z + 1).scale(0.5)).toRGBArray();
+export function transformRayToColor(ray, world) {
+	var hitRecord = null;
+	if (world.hit(ray, 0, INFINITY, hitRecord)) {
+		return Color.fromVec3(hitRecord.normal.add(new Vec3(1, 1, 1)).scale(0.5)).toRGBArray();
 	}
-	t = unit_direction.y * 0.5 + 0.5;
-	var startColor = Color.fromVec3(new Vec3(1.0, 1.0, 1.0));
-	var endColor = Color.fromVec3(new Vec3(0.5, 0.7, 1.0));
-	return Color.fromVec3(startColor.scale(1 - t).add(endColor.scale(t))).toRGBArray();
+	var unit_direction = ray.direction.normalize();
+	var t = (unit_direction.y + 1.0) * 0.5;
+	return Color.fromVec3(new Vec3(1.0, 1.0, 1.0).scale(1 - t).add(new Vec3(0.5, 0.7, 1.0).scale(t))).toRGBArray();
 }
 function hitSphere(center, radius, ray) {
 	var p = ray.origin.subtract(center);
@@ -68,7 +72,7 @@ function hitSphere(center, radius, ray) {
 	if (discriminant < 0) {
 		return -1;
 	} else {
-		return (-b - Math.sqrt(discriminant)) / 2 * a;
+		return (-half_b - Math.sqrt(discriminant)) / a;
 	}
 }
 //# sourceMappingURL=index.js.map

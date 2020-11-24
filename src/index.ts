@@ -1,7 +1,10 @@
-import { Verify } from 'crypto';
 import { Color } from './Color';
 import { Ray } from './Ray';
 import { Vec3 } from "./Vec3";
+import { Hittables } from "./Hittables";
+import { Sphere } from "./Sphere";
+import { HitRecord } from './HitRecord';
+import { INFINITY } from './utils';
 
 export function Render() {
 	// Setting related to Image.
@@ -11,6 +14,16 @@ export function Render() {
 	const ctxHeight = 400;
 	const aspectRatio = 1.5;
 	let ImageData = ctx.getImageData(0, 0, ctxWidth, ctxHeight);
+
+
+	// Setting world 
+	const world = new Hittables();
+	const Sphere1Center = new Vec3(0, 0, -1);
+	const Sphere1Radius = 0.5;
+	const Sphere2Center = new Vec3(0, -100.5, -1);
+	const Sphere2Radius = 100;
+	world!.add(new Sphere(Sphere1Center, Sphere1Radius));
+	world!.add(new Sphere(Sphere2Center, Sphere2Radius));
 	
 	// Setting related to Camera
 	const viewPortHeight = 2.0;
@@ -28,7 +41,7 @@ export function Render() {
 			const v = y / ctxHeight;
 			const b = 0.2;
 			const ray = new Ray(origin, lowerLeftCorner.add(horizontal.scale(u)).add(vertical.scale(v)).subtract(origin))
-			const colorArray = transformRayToColor(ray);
+			const colorArray = transformRayToColor(ray, world!);
 			const index = (x + y * ctxWidth) * 4;
 			ImageData.data[index + 0] = colorArray[0];
 			ImageData.data[index + 1] = colorArray[1];
@@ -40,18 +53,15 @@ export function Render() {
 	ctx.putImageData(ImageData, 0, 0);
 }
 
-export function transformRayToColor(ray: Ray): [number, number, number] {
-	const unit_direction = ray.direction.normalize();
-	const center = new Vec3(0, 0, -1);
-	let t = hitSphere(center, 0.5, ray);
-	if (t > 0) {
-		const N = ray.pointAtParameter(t).subtract(center).normalize();
-		return Color.fromVec3((new Vec3(N.x + 1, N.y + 1, N.z + 1)).scale(0.5)).toRGBArray();
+export function transformRayToColor(ray: Ray, world: Hittables): [number, number, number] {
+	const hitRecord: HitRecord | null = null;
+
+	if (world.hit(ray, 0, INFINITY, hitRecord!)) {
+		return Color.fromVec3(hitRecord!.normal.add(new Vec3(1, 1, 1)).scale(0.5)).toRGBArray();
 	}
-	t = unit_direction.y * 0.5 + 0.5;
-	const startColor = Color.fromVec3(new Vec3(1.0, 1.0, 1.0));
-	const endColor = Color.fromVec3(new Vec3(0.5, 0.7, 1.0));
-	return Color.fromVec3(startColor.scale((1 - t)).add(endColor.scale(t))).toRGBArray();
+	const unit_direction = ray.direction.normalize();
+	const t = (unit_direction.y + 1.0) * 0.5;
+	return Color.fromVec3(new Vec3(1.0, 1.0, 1.0).scale(1 - t).add(new Vec3(0.5, 0.7, 1.0).scale(t))).toRGBArray();
 }
 
 function hitSphere(center: Vec3, radius: number, ray: Ray): number {
