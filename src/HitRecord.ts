@@ -11,6 +11,7 @@ export class HitRecord {
 		this.t = t;
 		this.p = p;
 		this.normal = normal;
+		this.frontFace = true;
 	}
 
 	setFaceNormal(ray: Ray, outwardNormal: Vec3) {
